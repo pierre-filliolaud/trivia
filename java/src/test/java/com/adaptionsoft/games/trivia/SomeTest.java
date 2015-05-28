@@ -2,13 +2,13 @@ package com.adaptionsoft.games.trivia;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SomeTest {
 
     @Test
-    public void true_is_true() throws Exception {
-        assertTrue(false);
+    public void should_() {
+        assertThat(true).isTrue();
     }
 
 }
