@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SomeTest {
+public class GameTest {
 
     @Test
     public void should_() {
