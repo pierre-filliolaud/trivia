@@ -4,10 +4,9 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+		<title>Event sourcing / CQRS : live coding</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+		<meta name="description" content="Support aux speakers pour la présentation">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -15,7 +14,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+		<link rel="stylesheet" href="css/theme/moon.css" id="theme">
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -41,140 +40,217 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>Reveal.js</h1>
-					<h3>The HTML Presentation Framework</h3>
-					<p>
-						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
-					</p>
+					<h1>Bienvenue</h1>
+					<ul>
+						<li>Démarche : présentation des concepts event sourcing / CQRS par du code</li>
+						<li>Attention : c'est un live coding</li>
+					</ul>
 				</section>
-
 				<section>
-					<h2>Hello There</h2>
-					<p>
-						reveal.js enables you to create beautiful interactive slide decks using HTML. This presentation will show you examples of what it can do.
-					</p>
+					<h1>Plan</h1>
+					<h2>1. Event sourcing</h2>
+					<ol>
+						<li>Comment on va voir émerger <em>naturellement</em> les évènements du système</li>
+						<li>Comment on va découvrir les fonctionnalités utiles d'un <em>event store</em></li>
+					</ol>
 				</section>
-
-				<!-- Example of nested vertical slides -->
 				<section>
-					<section>
-						<h2>Vertical Slides</h2>
-						<p>Slides can be nested inside of each other.</p>
-						<p>Use the <em>Space</em> key to navigate through all slides.</p>
-						<br>
-						<a href="#" class="navigate-down">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section>
-						<h2>Basement Level 1</h2>
-						<p>Nested slides are useful for adding additional detail underneath a high level horizontal slide.</p>
-					</section>
-					<section>
-						<h2>Basement Level 2</h2>
-						<p>That's it, time to go back up.</p>
-						<br>
-						<a href="#/2">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
-						</a>
-					</section>
+					<h1>Plan</h1>
+					<h2>2. CQRS</h2>
+					<ol>
+						<li>Pourquoi découper son système en commandes et en queries</li>
+						<li>Comment découper son système et commandes et en queries</li>
+						<li>Pourquoi CQRS s'adapte extrèmement bien à l'event sourcing</li>
+					</ol>
 				</section>
-
 				<section>
-					<h2>Slides</h2>
-					<p>
-						Not a coder? Not a problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slides.com" target="_blank">http://slides.com</a>.
-					</p>
+					<h1>Plan</h1>
+					<h2>3. Stratégies de rejeu</h2>
+					<ol>
+						<li>Comment l'event sourcing vous permet de rejouer le passé</li>
+						<li>Quels sont les intérêts de pouvoir rejouer les évènements immuables du passé</li>
+					</ol>
 				</section>
-
 				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview.
-					</p>
-					<p>
-						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
+					<h1>Préambule</h1>
+					<h2>Notre cas d'étude</h2>
+					<ul>
+						<li>Connaissez-vous les katas de refactoring ?</li>
+						<li>Trivia : du code dégeu (montrer <code>Game</code>)</li>
+					</ul>
 				</section>
-
 				<section>
-					<h2>Touch Optimized</h2>
-					<p>
-						Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
-					</p>
+					<h1>Préambule</h1>
+					<h2>Notre cas d'étude</h2>
+					<ul>
+						<li>Principe du jeu :
+							<ol>
+								<li>des joueurs</li>
+								<li>des questions dans des catégories</li>
+								<li>un plateau</li>
+								<li>un dé</li>
+								<li>un maître du jeu</li>
+								<li>une prison</li>
+							</ol>
+						</li>
+						<li>Cinématique (montrer <code>GameRunner</code>)</li>
+					</ul>
 				</section>
-
+				<section>
+					<h1>Préambule</h1>
+					<h2>Notre cas d'étude</h2>
+					<p>On va commencer le kata ensemble en écrivant des tests</p>
+					<p>C'est là normalement que vous vous demandez si vous vous ne vous êtes pas trompés de salle</p>
+					<p>On vous confirme : c'est bien un live coding sur Event sourcing / CQRS</p>
+					<p>Un peu de patience : vous allez comprendre</p>
+				</section>
+				<section>
+					<h1>1 - ES - events</h1>
+					<p>Aller dans <code>GameTest</code></p>
+					<p>Tester la fonctionalité d'ajout d'un joueur : <code>should_add_one_player()</code></p>
+				</section>
+				<section>
+					<h1>1 - ES - events</h1>
+					<pre><code data-trim>
+assertThat(result).isTrue()
+assertThat(game.howManyPlayers()).isEqualTo(1)
+					</code></pre>
+					<p>pas suffisant pour être sûr que le nom du joueur est bien pris en compte</p>
+					<p>Lancer le test</p>
+				</section>
+				<section>
+					<h1>1 - ES - events</h1>
+					<p>Oh regarde : il y a des sorties dans la console</p>
+					<p>Ça serait pas des évènements par hasard ?</p>
+					<pre><code data-trim>
+assertThat(eventStore.events()).containsExactly(
+    new PlayerWasAdded("seb"),
+    new PlayersCount(1));
+					</code></pre>
+					<p>implémenter <code>PlayerWasAdded</code> et <code>PlayersCount</code></p>
+				</section>
+				<section>
+					<h1>1 - ES - events</h1>
+					<p>Ajout de <code>@Rule EventStore</code></p>
+					<p>Fonction <code>String -> Event</code> à implémenter dans <code>Event</code></p>
+					<p><code>static Event fromLine(String line)</code></p>
+					<p><code>return UnknownEvent();</code></p>
+					<p style="color: red">ça fail</p>
+				</section>
+				<section>
+					<h1>1 - ES - events</h1>
+					<p>implémenter <code>static Event fromLine(String line)</code> avec des regexp</p>
+					<p style="color: green">ça passe</p>
+				</section>
+				<section>
+					<h1>1 - ES</h1>
+					<p><strong>Transition</strong> : nous allons découvrir quelques fonctionnalités d'un event store à partir des tests.</p>
+				</section>
+				<section>
+					<h1>1 - ES - start</h1>
+					<p>dupliquer le test précédent en <code>should_add_two_players</code></p>
+					<p>ajouter <code>game.add("Pierre-Jean")</code></p>
+					<p>ajouter les assertions seulement sur</p>
+					<ul>
+						<li><code>Pierre-Jean</code></li>
+						<li><em>count</em> à 2</li>
+					</ul>
+					<p style="color: red">ça fail</p>
+				</section>
+				<section>
+					<h1>1 - ES - start</h1>
+					<p><code>EventStore</code> doit enregistrer les évènements quand <strong>je</strong> le décide</p>
+					<p>ajouter <code>game.start()</code></p>
+					<p style="color: green">ça passe</p>
+					<p>aller voir l'implem</p>
+				</section>
+				<section>
+					<h1>1 - ES - filtre</h1>
+					<p>dupliquer le test précédent en <code>should_add_players_with_same_name</code></p>
+					<p>ajouter deux fois <code>"Pierre-Jean"</code></p>
+					<p>asserter seulement <code>PlayerWasAdded</code></p>
+					<p>c'est plus lisible pour le test</p>
+					<p>on veut parfois ne s'intéresser qu'à un seul type d'events</p>
+					<p style="color: red">ça fail</p>
+				</section>
+				<section>
+					<h1>1 - ES - filtre</h1>
+					<p><code>eventStore.events(PlayerWasAdded.class)</code></p>
+					<p style="color: green">ça passe</p>
+					<p>aller voir l'implem</p>
+				</section>
+				<section>
+					<h1>1 - ES - proc</h1>
+					<p>Oh là là c'est embêtant toutes ces sorties dans la console</p>
+					<p>Comment on clean un peu tout ça ?</p>
+					<p>ajouter <code>eventStore.debug()</code> au début du test</p>
+					<p style="color: red">ça compile pas</p>
+				</section>
+				<section>
+					<h1>1 - ES - proc</h1>
+					<p>créer la méthode dans <code>EventStore</code></p>
+					<p>expliquer les processeurs</p>
+					<p>bouger l'initialisation des 2 processeurs existants dans <code>debug()</code></p>
+					<pre><code>
+preProcessors.add(line -> console.format("%50s -> ", line));
+postProcessors.add(console::println);
+					</code></pre>
+					<p style="color: green">ça compile et on ne voit que les logs qui nous intéressent</p>
+				</section>
+				<section>
+					<h1>1 &rarr; 2</h1>
+					<p>il y a plein d'autres fonctionnalités dans un <code>EventStore</code></p>
+					<p>on va s'arrêter là</p>
+					<p><strong>Résumé</strong> : c'est quoi l'EventStore ?</p>
+					<p>c'est la base de l'event sourcing</p>
+					<p>un système de persistance d'évènements immuables et chronologiques</p>
+				</section>
+				<section>
+					<h1>1 &rarr; 2</h1>
+					<p>on vous avait promis CQRS</p>
+					<p>découvrons les concepts par du code</p>
+				</section>
+				<section>
+					<h1>2 - CQRS - Segreg.</h1>
+					<blockquote>&ldquo;Command Query Responsability Segregation&rdquo;</blockquote>
+					<p>on va grave ségreger</p>
+					<p>créer les interfaces <code>Commands</code> et <code>Queries</code></p>
+					<p><code>Game</code> les implémente</p>
+					<p>parcourir les méthodes (noms et implem)</p>
+					<p>choisir dans quelle interface ça matche</p>
+				</section>
+				<section>
+					<h1>2 - CQRS - Segreg.</h1>
+					<pre><code>
+Commands
+ boolean add(String)
+ void roll(int)
+ boolean wasCorrectlyAnswered()
+ boolean wrongAnswer()
+Queries
+ boolean isPlayable()
+ int howManyPlayers()
+					</code></pre>
+				</section>
 				<section data-markdown>
 					<script type="text/template">
-						## Markdown support
+						TODO
+						
+						Par rapport aux queries ce qu'on observe ici c'est que `boolean isPlayable()` n'est utilisé que dans les tests. C'est du
+						code mort. On le supprime. `int howManyPlayers()` n'est utilisé que dans cette classe. Autrement dit elle est privée.
+						Donc l'interface `Queries` pourrait être vide.
 
-						Write content using inline or external Markdown.
-						Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
+						Game est donc une implémentation du circuit d'écriture du système.
 
-						```
-						<section data-markdown>
-						  ## Markdown support
+						Notre PO nous demande maintenant d'écrire un client qui serait capable de récupérer l'état du jeu à tout moment. Nous
+						allons donc écrire un nouveau composant qui va effectuer cette tâche en s'abonnant aux évènements écrits par le circuit
+						d'écriture.
 
-						  Write content using inline or external Markdown.
-						  Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-						</section>
-						```
+						## Étape 3 ##
+
+						Partir du client graphique et montrer le mode rejoue des évènements depuis le début vs récupère l'état courant du jeu.
+
 					</script>
-				</section>
-
-				<section>
-					<section id="fragments">
-						<h2>Fragments</h2>
-						<p>Hit the next arrow...</p>
-						<p class="fragment">... to step through ...</p>
-						<p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>
-
-						<aside class="notes">
-							This slide has fragments which are also stepped through in the notes window.
-						</aside>
-					</section>
-					<section>
-						<h2>Fragment Styles</h2>
-						<p>There's different types of fragments, like:</p>
-						<p class="fragment grow">grow</p>
-						<p class="fragment shrink">shrink</p>
-						<p class="fragment fade-out">fade-out</p>
-						<p class="fragment current-visible">current-visible</p>
-						<p class="fragment highlight-red">highlight-red</p>
-						<p class="fragment highlight-blue">highlight-blue</p>
-					</section>
-				</section>
-
-				<section id="transitions">
-					<h2>Transition Styles</h2>
-					<p>
-						You can select from different transitions, like: <br>
-						<a href="?transition=none#/transitions">None</a> -
-						<a href="?transition=fade#/transitions">Fade</a> -
-						<a href="?transition=slide#/transitions">Slide</a> -
-						<a href="?transition=convex#/transitions">Convex</a> -
-						<a href="?transition=concave#/transitions">Concave</a> -
-						<a href="?transition=zoom#/transitions">Zoom</a>
-					</p>
-				</section>
-
-				<section id="themes">
-					<h2>Themes</h2>
-					<p>
-						reveal.js comes with a few themes built in: <br>
-						<!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/black.css'); return false;">Black (default)</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/white.css'); return false;">White</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/league.css'); return false;">League</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/sky.css'); return false;">Sky</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/beige.css'); return false;">Beige</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/simple.css'); return false;">Simple</a> <br>
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/serif.css'); return false;">Serif</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/blood.css'); return false;">Blood</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/night.css'); return false;">Night</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/moon.css'); return false;">Moon</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/solarized.css'); return false;">Solarized</a>
-					</p>
 				</section>
 
 				<section>
@@ -206,112 +282,6 @@
 					</section>
 				</section>
 
-				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
-					<h2>Background Transitions</h2>
-					<p>
-						Different background transitions are available via the backgroundTransition option. This one's called "zoom".
-					</p>
-					<pre><code>Reveal.configure({ backgroundTransition: 'zoom' })</code></pre>
-				</section>
-
-				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
-					<h2>Background Transitions</h2>
-					<p>
-						You can override background transitions per-slide.
-					</p>
-					<pre><code style="word-wrap: break-word;">&lt;section data-background-transition="zoom"&gt;</code></pre>
-				</section>
-
-				<section>
-					<h2>Pretty Code</h2>
-					<pre><code data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) {
-        node.className += ' roll';
-      }
-    }
-  }
-}
-					</code></pre>
-					<p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
-				</section>
-
-				<section>
-					<h2>Marvelous List</h2>
-					<ul>
-						<li>No order here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Fantastic Ordered List</h2>
-					<ol>
-						<li>One is smaller than...</li>
-						<li>Two is smaller than...</li>
-						<li>Three!</li>
-					</ol>
-				</section>
-
-				<section>
-					<h2>Tabular Tables</h2>
-					<table>
-						<thead>
-							<tr>
-								<th>Item</th>
-								<th>Value</th>
-								<th>Quantity</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Apples</td>
-								<td>$1</td>
-								<td>7</td>
-							<tr>
-							<tr>
-								<td>Lemonade</td>
-								<td>$2</td>
-								<td>18</td>
-							<tr>
-							<tr>
-								<td>Bread</td>
-								<td>$3</td>
-								<td>2</td>
-							<tr>
-						</tbody>
-					</table>
-				</section>
-
-				<section>
-					<h2>Clever Quotes</h2>
-					<p>
-						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
-					</p>
-					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
-						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
-					</blockquote>
-				</section>
-
-				<section>
-					<h2>Intergalactic Interconnections</h2>
-					<p>
-						You can link between slides internally,
-						<a href="#/2/3">like this</a>.
-					</p>
-				</section>
-
 				<section>
 					<h2>Speaker View</h2>
 					<p>There's a <a href="https://github.com/hakimel/reveal.js#speaker-notes">speaker view</a>. It includes a timer, preview of the upcoming slide as well as your speaker notes.</p>
@@ -321,60 +291,6 @@ function linkify( selector ) {
 						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
 					</aside>
 				</section>
-
-				<section>
-					<h2>Export to PDF</h2>
-					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, here's an example:</p>
-					<iframe src="//www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
-				</section>
-
-				<section>
-					<h2>Global State</h2>
-					<p>
-						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-						will be added as a class to the document element when the slide is open. This lets you
-						apply broader style changes, like switching the page background.
-					</p>
-				</section>
-
-				<section data-state="customevent">
-					<h2>State Events</h2>
-					<p>
-						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-					</p>
-					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
-				</section>
-
-				<section>
-					<h2>Take a Moment</h2>
-					<p>
-						Press B or . on your keyboard to pause the presentation. This is helpful when you're on stage and want to take distracting slides off the screen.
-					</p>
-				</section>
-
-				<section>
-					<h2>Much more</h2>
-					<ul>
-						<li>Right-to-left support</li>
-						<li><a href="https://github.com/hakimel/reveal.js#api">Extensive JavaScript API</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#auto-sliding">Auto-progression</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#parallax-background">Parallax backgrounds</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#keyboard-bindings">Custom keyboard bindings</a></li>
-					</ul>
-				</section>
-
-				<section style="text-align: left;">
-					<h1>THE END</h1>
-					<p>
-						- <a href="http://slides.com">Try the online editor</a> <br>
-						- <a href="https://github.com/hakimel/reveal.js">Source code &amp; documentation</a>
-					</p>
-				</section>
-
 			</div>
 
 		</div>
