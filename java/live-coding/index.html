@@ -27,6 +27,19 @@
 			link.type = 'text/css';
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
+
+			window.onload = function () {
+				var sections = document.getElementsByTagName('section');
+				console.log(sections.length);
+				for (var i = 0; i < sections.length; i++) {
+					var section = sections.item(i);
+					if (section.hasAttribute('data-speaker')) {
+						section.removeAttribute('data-speaker');
+						section.attrcreateAttribute('')
+					}
+					console.log('section ' + i)
+				}
+			};
 		</script>
 
 		<!--[if lt IE 9]>
@@ -40,49 +53,49 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-				<section>
-					<h1>Bienvenue</h1>
+				<section data-speaker="pierre-jean">
+					<h2>Bienvenue</h2>
 					<ul>
 						<li>Démarche : présentation des concepts event sourcing / CQRS par du code</li>
 						<li>Attention : c'est un live coding</li>
 					</ul>
 				</section>
-				<section>
-					<h1>Plan</h1>
-					<h2>1. Event sourcing</h2>
+				<section data-background="assets/sebastian.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>Plan</h2>
+					<h3>1. Event sourcing</h3>
 					<ol>
 						<li>Comment on va voir émerger <em>naturellement</em> les évènements du système</li>
 						<li>Comment on va découvrir les fonctionnalités utiles d'un <em>event store</em></li>
 					</ol>
 				</section>
-				<section>
-					<h1>Plan</h1>
-					<h2>2. CQRS</h2>
+				<section data-background="assets/pierre-jean.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>Plan</h2>
+					<h3>2. CQRS</h3>
 					<ol>
 						<li>Pourquoi découper son système en commandes et en queries</li>
 						<li>Comment découper son système et commandes et en queries</li>
 						<li>Pourquoi CQRS s'adapte extrèmement bien à l'event sourcing</li>
 					</ol>
 				</section>
-				<section>
-					<h1>Plan</h1>
-					<h2>3. Stratégies de rejeu</h2>
+				<section data-background="assets/sebastian.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>Plan</h2>
+					<h3>3. Stratégies de rejeu</h3>
 					<ol>
 						<li>Comment l'event sourcing vous permet de rejouer le passé</li>
 						<li>Quels sont les intérêts de pouvoir rejouer les évènements immuables du passé</li>
 					</ol>
 				</section>
-				<section>
-					<h1>Préambule</h1>
-					<h2>Notre cas d'étude</h2>
+				<section data-background="assets/pierre-jean.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>Préambule</h2>
+					<h3>Notre cas d'étude</h3>
 					<ul>
 						<li>Connaissez-vous les katas de refactoring ?</li>
 						<li>Trivia : du code <em>dégeu</em> <span class="action">montrer <code>Game</code></span></li>
 					</ul>
 				</section>
-				<section>
-					<h1>Préambule</h1>
-					<h2>Notre cas d'étude</h2>
+				<section data-background="assets/sebastian.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>Préambule</h2>
+					<h3>Notre cas d'étude</h3>
 					<ul>
 						<li>Principe du jeu :
 							<ol>
@@ -97,21 +110,21 @@
 						<li>Cinématique <span class="action">montrer <code>GameRunner</code></span></li>
 					</ul>
 				</section>
-				<section>
-					<h1>Préambule</h1>
-					<h2>Notre cas d'étude</h2>
+				<section data-background="assets/pierre-jean.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>Préambule</h2>
+					<h3>Notre cas d'étude</h3>
 					<p>On va commencer le kata ensemble en écrivant des tests</p>
 					<p>C'est là normalement que vous vous demandez si vous vous ne vous êtes pas trompés de salle</p>
 					<p>On vous confirme : c'est bien un live coding sur Event sourcing / CQRS</p>
 					<p>Un peu de patience : vous allez comprendre</p>
 				</section>
-				<section>
-					<h1>1 - ES - events</h1>
+				<section data-background="assets/sebastian.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>1 - ES - events</h2>
 					<p class="action">Aller dans <code>GameTest</code></p>
 					<p class="action">Tester la fonctionalité d'ajout d'un joueur : <code>should_add_one_player()</code></p>
 				</section>
-				<section>
-					<h1>1 - ES - events</h1>
+				<section data-background="assets/pierre-jean.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>1 - ES - events</h2>
 					<pre><code data-trim>
 assertThat(result).isTrue()
 assertThat(game.howManyPlayers()).isEqualTo(1)
@@ -119,8 +132,8 @@ assertThat(game.howManyPlayers()).isEqualTo(1)
 					<p>Pas suffisant pour être sûr que le nom du joueur est bien pris en compte</p>
 					<p class="action">Lancer le test</p>
 				</section>
-				<section>
-					<h1>1 - ES - events</h1>
+				<section data-background="assets/sebastian.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>1 - ES - events</h2>
 					<p>Oh regarde : il y a des sorties dans la console</p>
 					<p>Ça serait pas des évènements par hasard ?</p>
 					<pre><code data-trim>
@@ -130,25 +143,25 @@ assertThat(eventStore.events()).containsExactly(
 					</code></pre>
 					<p class="action">Implémenter <code>PlayerWasAdded</code> et <code>PlayersCount</code></p>
 				</section>
-				<section>
-					<h1>1 - ES - events</h1>
+				<section data-background="assets/pierre-jean.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>1 - ES - events</h2>
 					<p>Ajout de <code>@Rule EventStore</code></p>
 					<p>Fonction <code>String -> Event</code> à implémenter dans <code>Event</code></p>
 					<p><code>static Event fromLine(String line)</code></p>
 					<p><code>return UnknownEvent();</code></p>
 					<p class="fail">Ça fail</p>
 				</section>
-				<section>
-					<h1>1 - ES - events</h1>
+				<section data-background="assets/sebastian.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>1 - ES - events</h2>
 					<p>Implémenter <code>static Event fromLine(String line)</code> avec des regexp</p>
 					<p class="success">Ça passe</p>
 				</section>
-				<section>
-					<h1>1 - ES</h1>
+				<section data-background="assets/pierre-jean.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>1 - ES</h2>
 					<p><strong>Transition</strong> : nous allons découvrir quelques fonctionnalités d'un event store à partir des tests.</p>
 				</section>
-				<section>
-					<h1>1 - ES - start</h1>
+				<section data-background="assets/sebastian.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>1 - ES - start</h2>
 					<p class="action">dupliquer le test précédent en <code>should_add_two_players</code></p>
 					<p class="action">ajouter <code>game.add("Pierre-Jean")</code></p>
 					<p class="action">ajouter les assertions seulement sur</p>
@@ -158,15 +171,15 @@ assertThat(eventStore.events()).containsExactly(
 					</ul>
 					<p class="fail">ça fail</p>
 				</section>
-				<section>
-					<h1>1 - ES - start</h1>
+				<section data-background="assets/pierre-jean.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>1 - ES - start</h2>
 					<p><code>EventStore</code> doit enregistrer les évènements quand <strong>je</strong> le décide</p>
 					<p class="action">ajouter <code>game.start()</code></p>
 					<p class="success">ça passe</p>
 					<p class="action">aller voir l'implem</p>
 				</section>
-				<section>
-					<h1>1 - ES - filtre</h1>
+				<section data-background="assets/sebastian.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>1 - ES - filtre</h2>
 					<p>On veut parfois ne s'intéresser qu'à un seul type d'events</p>
 					<p class="action">dupliquer le test précédent en <code>should_add_players_with_same_name</code></p>
 					<p class="action">ajouter deux fois <code>"Pierre-Jean"</code></p>
@@ -174,21 +187,21 @@ assertThat(eventStore.events()).containsExactly(
 					<p>c'est plus lisible pour le test</p>
 					<p class="fail">ça fail</p>
 				</section>
-				<section>
-					<h1>1 - ES - filtre</h1>
+				<section data-background="assets/pierre-jean.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>1 - ES - filtre</h2>
 					<p><code>eventStore.events(PlayerWasAdded.class)</code></p>
 					<p style="color: green">ça passe</p>
 					<p>aller voir l'implem</p>
 				</section>
-				<section>
-					<h1>1 - ES - proc</h1>
+				<section data-background="assets/sebastian.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>1 - ES - proc</h2>
 					<p>Oh là là c'est embêtant toutes ces sorties dans la console</p>
 					<p>Comment on clean un peu tout ça ?</p>
 					<p>ajouter <code>eventStore.debug()</code> au début du test</p>
 					<p style="color: red">ça compile pas</p>
 				</section>
-				<section>
-					<h1>1 - ES - proc</h1>
+				<section data-background="assets/pierre-jean.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>1 - ES - proc</h2>
 					<p>créer la méthode dans <code>EventStore</code></p>
 					<p>expliquer les processeurs</p>
 					<p>bouger l'initialisation des 2 processeurs existants dans <code>debug()</code></p>
@@ -198,21 +211,21 @@ postProcessors.add(console::println);
 					</code></pre>
 					<p style="color: green">ça compile et on ne voit que les logs qui nous intéressent</p>
 				</section>
-				<section>
-					<h1>1 &rarr; 2</h1>
+				<section data-background="assets/sebastian.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>1 &rarr; 2</h2>
 					<p>il y a plein d'autres fonctionnalités dans un <code>EventStore</code></p>
 					<p>on va s'arrêter là</p>
 					<p><strong>Résumé</strong> : c'est quoi l'EventStore ?</p>
 					<p>c'est la base de l'event sourcing</p>
 					<p>un système de persistance d'évènements immuables et chronologiques</p>
 				</section>
-				<section>
-					<h1>1 &rarr; 2</h1>
+				<section data-background="assets/pierre-jean.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>1 &rarr; 2</h2>
 					<p>on vous avait promis CQRS</p>
 					<p>découvrons les concepts par du code</p>
 				</section>
-				<section>
-					<h1>2 - CQRS - Segreg.</h1>
+				<section data-background="assets/sebastian.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>2 - CQRS - Segreg.</h2>
 					<blockquote>&ldquo;Command Query Responsability Segregation&rdquo;</blockquote>
 					<p>on va grave ségreger</p>
 					<p>créer les interfaces <code>Commands</code> et <code>Queries</code></p>
@@ -220,8 +233,8 @@ postProcessors.add(console::println);
 					<p>parcourir les méthodes (noms et implem)</p>
 					<p>choisir dans quelle interface ça matche</p>
 				</section>
-				<section>
-					<h1>2 - CQRS - Segreg.</h1>
+				<section data-background="assets/pierre-jean.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>2 - CQRS - Segreg.</h2>
 					<p>On doit arriver à ça</p>
 					<pre><code>
 Commands
@@ -234,13 +247,22 @@ Queries
  int howManyPlayers()
 					</code></pre>
 				</section>
-				<section>
-					<h1>2 - CQRS - Segreg.</h1>
-					<h2>Commandes</h2>
-					<p class="action">Aller dans la classe <code>Commands</code></p>
+				<section data-background="assets/pierre-jean.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>2 - CQRS - Segreg.</h2>
+					<h3>Commands</h3>
+					<p class="action">Aller dans l'interface <code>Commands</code></p>
 					<p>Sur les commandes, on peut juste remarquer qu'elles ne sont pas toutes <code>void</code></p>
 					<p>Généralement on préfère faire du <em>fire and forget</em> et être asynchrone sur les commandes</p>
-					<p>Prendre l'exemple de add qui retourne toujours <code>true</code> !</p>
+					<p>Prendre l'exemple de <code>add</code> qui retourne toujours <code>true</code> !</p>
+				</section>
+				<section data-background="assets/sebastian.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>2 - CQRS - Segreg.</h2>
+					<h3>Queries</h3>
+					<p class="action">Aller dans l'interface <code>Queries</code></p>
+					<p class="action">Montrer les usages de <code>isPlayable()</code></p>
+					<p>Utilisé que ans les tests : c'est du code mort</p>
+					<p>Généralement on préfère faire du <em>fire and forget</em> et être asynchrone sur les commandes</p>
+					<p>Prendre l'exemple de <code>add</code> qui retourne toujours <code>true</code> !</p>
 				</section>
 				<section data-markdown>
 					<script type="text/template">
@@ -265,7 +287,7 @@ Queries
 
 				<section>
 					<section data-background="#dddddd">
-						<h2>Slide Backgrounds</h2>
+						<h3>Slide Backgrounds</h3>
 						<p>
 							Set <code>data-background="#dddddd"</code> on a slide to change the background color. All CSS color formats are supported.
 						</p>
@@ -274,26 +296,26 @@ Queries
 						</a>
 					</section>
 					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png">
-						<h2>Image Backgrounds</h2>
+						<h3>Image Backgrounds</h3>
 						<pre><code>&lt;section data-background="image.png"&gt;</code></pre>
 					</section>
 					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png" data-background-repeat="repeat" data-background-size="100px">
-						<h2>Tiled Backgrounds</h2>
+						<h3>Tiled Backgrounds</h3>
 						<pre><code style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
 					</section>
 					<section data-background-video="https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-color="#000000">
 						<div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-							<h2>Video Backgrounds</h2>
+							<h3>Video Backgrounds</h3>
 							<pre><code style="word-wrap: break-word;">&lt;section data-background-video="video.mp4,video.webm"&gt;</code></pre>
 						</div>
 					</section>
 					<section data-background="http://i.giphy.com/90F8aUepslB84.gif">
-						<h2>... and GIFs!</h2>
+						<h3>... and GIFs!</h3>
 					</section>
 				</section>
 
 				<section>
-					<h2>Speaker View</h2>
+					<h3>Speaker View</h3>
 					<p>There's a <a href="https://github.com/hakimel/reveal.js#speaker-notes">speaker view</a>. It includes a timer, preview of the upcoming slide as well as your speaker notes.</p>
 					<p>Press the <em>S</em> key to try it out.</p>
 
