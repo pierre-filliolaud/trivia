@@ -40,6 +40,14 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
+				<section>
+					<h2>Checks</h2>
+					<ul>
+						<li><code>git checkout live-coding-1</code></li>
+						<li><code>sudo apachectl start</code></li>
+						<li><code>http localhost/game-state.json</code></li>
+					</ul>
+				</section>
 				<section data-speaker="">
 					<h2>Bienvenue</h2>
 					<ul>
@@ -210,6 +218,7 @@ postProcessors.add(console::println);
 					<h2>1 &rarr; 2</h2>
 					<p>On vous avait promis CQRS</p>
 					<p>Découvrons les concepts par du code</p>
+					<p class="action"><code>git checkout live-coding-2</code></p>
 				</section>
 				<section data-speaker="">
 					<h2>2 - CQRS - Segreg.</h2>
@@ -315,6 +324,7 @@ try {
 					<p>Depuis le début, on ne fait qu'avancer dans les évènements.</p>
 					<p>Que se passe-t-il si un problème survient lors de l'envoi des messages ?</p>
 					<p>Comment faire si on doit être tolérant à la panne, voire restaurer l'état du système 10 minutes/un jour avant ?</p>
+					<p class="action"><code>git checkout live-coding-3</code></p>
 				</section>
 				<section data-speaker="">
 					<h2>3 - Snapshots</h2>
