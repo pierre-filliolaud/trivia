@@ -247,28 +247,35 @@ Queries
 					<h3>Queries</h3>
 					<p class="action">Aller dans l'interface <code>Queries</code></p>
 					<p class="action">Montrer les usages de <code>isPlayable()</code></p>
-					<p>Utilisé que ans les tests : c'est du code mort</p>
-					<p>Généralement on préfère faire du <em>fire and forget</em> et être asynchrone sur les commandes</p>
-					<p>Prendre l'exemple de <code>add</code> qui retourne toujours <code>true</code> !</p>
+					<p>Utilisé que dans les tests : c'est du code mort</p>
+					<p class="action">Supprimer <code>isPlayable</code> et ses usages</p>
+				</section>
+				<section data-speaker="">
+					<h2>2 - CQRS - Segreg.</h2>
+					<h3>Queries</h3>
+					<p class="action">Revenir sur l'interface <code>Queries</code></p>
+					<p class="action">Montrer les usages de <code>howManyPlayers()</code></p>
+					<p>C'est une méthode privée</p>
+					<p class="action">Supprimer <code>howManyPlayers()</code></p>
+				</section>
+				<section data-speaker="">
+					<h2>2 - CQRS - Segreg.</h2>
+					<h3>Queries</h3>
+					<p class="action">Revenir sur l'interface <code>Queries</code></p>
+					<p>Il n'y a pas de <em>queries</em> dans <code>Game</code></p>
+					<p>C'est une implémentation du circuit d'écriture du système</p>
+				</section>
+				<section data-speaker="">
+					<h2>2 - CQRS - Segreg.</h2>
+					<h3>Queries</h3>
+					<p>Nouveau scénario : notre jeu a du succès. Beaucoup de succès.</p>
+					<p>Notre PO nous demande d'implémenter un service web qui permet de récupérer à tout moment l'état du jeu</p>
 				</section>
 				<section data-markdown>
 					<script type="text/template">
-						TODO
-						
-						Par rapport aux queries ce qu'on observe ici c'est que `boolean isPlayable()` n'est utilisé que dans les tests. C'est du
-						code mort. On le supprime. `int howManyPlayers()` n'est utilisé que dans cette classe. Autrement dit elle est privée.
-						Donc l'interface `Queries` pourrait être vide.
-
-						Game est donc une implémentation du circuit d'écriture du système.
-
-						Notre PO nous demande maintenant d'écrire un client qui serait capable de récupérer l'état du jeu à tout moment. Nous
-						allons donc écrire un nouveau composant qui va effectuer cette tâche en s'abonnant aux évènements écrits par le circuit
-						d'écriture.
-
 						## Étape 3 ##
 
 						Partir du client graphique et montrer le mode rejoue des évènements depuis le début vs récupère l'état courant du jeu.
-
 					</script>
 				</section>
 
