@@ -300,7 +300,7 @@ Queries
 					<p class="action">Réparer les tests</p>
 					<p class="action">Laisser <code>should_write_json_file</code> et <code>should_write_json_file_at_startup</code> pour la fin</p>
 				</section>
-				<section data-background="assets/sebastian.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+				<section data-background="assets/pierre-jean.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
 					<h2>2 - CQRS - Segreg.</h2>
 					<h3>Queries</h3>
 					<p>À chaque modification de l'état, nous allons écrire sur le disque</p>
@@ -315,7 +315,7 @@ try {
 					</code></pre>
 					<p class="success">Ça passe</p>
 				</section>
-				<section data-speaker="">
+				<section data-background="assets/pierre-jean.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
 					<h2>2 - CQRS - Segreg.</h2>
 					<h3>Démo</h3>
 					<p class="action">Montrer la méthode <code>main()</code></p>
@@ -324,24 +324,31 @@ try {
 					<p class="action">Entrer <code>pj was added</code></p>
 					<p class="action">Réexécuter <code>http localhost/game-state.json</code></p>
 				</section>
-				<section data-speaker="">
+				<section data-background="assets/pierre-jean.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
 					<h2>2 &rarr; 3</h2>
 					<p><em>Résumé</em> : on a vu concrètement comment séparer les responsabilités lecture/écriture</p>
 					<p>On a vu que l'implémentation était simplifiée si on travaillait déjà en event sourcing</p>
 					<p>La problématique principale de CQRS est bien la performance</p>
 				</section>
-				<section data-speaker="">
+				<section data-background="assets/sebastian.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
 					<h2>2 &rarr; 3</h2>
 					<p>Depuis le début, on ne fait qu'avancer dans les évènements.</p>
 					<p>Que se passe-t-il si un problème survient lors de l'envoi des messages ?</p>
 					<p>Comment faire si on doit être tolérant à la panne, voire restaurer l'état du système 10 minutes/un jour avant ?</p>
 					<p class="action"><code>git checkout live-coding-3</code></p>
 				</section>
-				<section data-speaker="">
+				<section data-background="assets/sebastian.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
 					<h2>3 - Snapshots</h2>
 					<p>Pour que ça vous parle un peu, on a fait intervenir un graphiste, un UX designer et une modéliste 3D</p>
 					<p class="action">Lancer <code>TriviaClient</code></p>
 					<p class="action">Scroller ou utiliser les flèches</p>
+				</section>
+				<section data-background="assets/sebastian.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>3 - Snapshots</h2>
+					<p>Implémentation :</p>
+					<p class="action">Appeler <code>snapshot()</code> dans le constructeur</p>
+					<p class="action">Générer un snapshot tous les 10 évènements</p>
+					<p>Démo</p>
 				</section>
 			</div>
 
@@ -357,10 +364,11 @@ try {
 			Reveal.initialize({
 				controls: true,
 				progress: true,
+				slideNumber: true,
 				history: true,
-				center: true,
+				center: false,
 
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				transition: 'none', // none/fade/slide/convex/concave/zoom
 
 				// Optional reveal.js plugins
 				dependencies: [
@@ -372,25 +380,6 @@ try {
 					{ src: 'plugin/notes/notes.js', async: true }
 				]
 			});
-			
-			function background(speaker) {
-				section.removeAttribute('data-speaker');
-				section.setAttribute('data-background', 'assets/' + speaker + '.jpg');
-				section.setAttribute('data-background-repeat', 'no-repeat');
-				section.setAttribute('data-background-size', '48pt');
-				section.setAttribute('data-background-position', 'top left');
-			}
-
-			var sections = document.getElementsByTagName('section');
-			var previousSpeaker = 'sebastian';
-			for (var i = 0; i < sections.length; i++) {
-				var section = sections.item(i);
-				if (section.hasAttribute('data-speaker')) {
-					var currentSpeaker = section.getAttribute('data-speaker') ? currentSpeaker = section.getAttribute('data-speaker') : (previousSpeaker === 'sebastian' ? 'pierre-jean' : 'sebastian');
-					previousSpeaker = currentSpeaker;
-					background(currentSpeaker);
-				}
-			}
 		</script>
 
 	</body>
