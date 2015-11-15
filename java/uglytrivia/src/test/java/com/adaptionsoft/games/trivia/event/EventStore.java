@@ -32,7 +32,7 @@ public class EventStore extends ExternalResource {
         
         this.currentLine = new StringBuilder();
 
-        this.preProcessors.add(line -> console.format("%20s -> ", line));
+        this.preProcessors.add(line -> console.format("%25s -> ", line));
         this.postProcessors.add(console::println);
     }
 
