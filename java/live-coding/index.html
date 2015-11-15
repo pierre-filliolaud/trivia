@@ -350,16 +350,41 @@ try {
 					<p>Pour que ça vous parle un peu, on a fait intervenir un graphiste, un UX designer et une modéliste 3D</p>
 					<p class="action">Lancer <code>TriviaClient</code></p>
 					<p class="action">Scroller ou utiliser les flèches</p>
+					<p>Ce qu'on aimerait c'est pouvoir revenir en arrière</p>
 				</section>
 				<section data-background="assets/eric.png" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
 					<h2>3 - Snapshots</h2>
-					<p>Implémentation :</p>
+					<p>On a déjà une implémentation de snapshot</p>
+					<p class="action">Aller dans <code>Snapshots</code></p>
+					<p>On est en terrain connu :</p>
+					<ul>
+						<li>c'est (encore) une implémentation de <code>EventsListener</code></li>
+					    <li>ça délègue à <code>GameState</code></li>
+					</ul>
+				</section>
+				<section data-background="assets/eric.png" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>3 - Snapshots</h2>
+					<p class="action">Aller sur <code>SnapshotsTest</code></p>
+					<p class="action">Lancer les tests</p>
+					<p class="fail">Ça fail</p>
+				</section>
+				<section data-background="assets/eric.png" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>3 - Snapshots</h2>
 					<p class="action">Appeler <code>snapshot()</code> dans le constructeur</p>
-					<p class="action">Générer un snapshot tous les 10 événements</p>
+					<p>Générer un snapshot tous les 10 événements</p>
+					<p>Dans <code>newEvent()</code>:<br><code>if (index % 10 == 0) snapshot();</code></p>
+					<p class="success">Ça passe</p>
+				</section>
+				<section data-background="assets/eric.png" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>3 - Snapshots</h2>
 					<p>Démo</p>
+					<p class="action">Lancer <code>TriviaClient</code></p>
 				</section>
 				<section data-background="assets/sebastian.png" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
 					<h2>Conclusion</h2>
+					<p>Event Sourcing c'est proche du métier : EventStorming, système auditable</p>
+					<p>CQRS ça clarifie les choses, ça apporte de la perf</p>
+					<p>Statégies de rejeu important pour la résilience</p>
 				</section>
 			</div>
 
