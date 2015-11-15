@@ -1,3 +1,3 @@
 # Live coding Event sourcing et CQRS #
 
-cf. live-coding/index.html?transition=none
+cf. http://rawgit.com/seblm/trivia/live-coding-1/java/live-coding/index.html
