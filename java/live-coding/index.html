@@ -45,8 +45,8 @@
 					<ul>
 						<li><code>git checkout live-coding-1</code></li>
 						<li><code>mvn clean</code></li>
-						<li><code>cd java/uglytrivia/target && \<br>sudo python -m SimpleHTTPServer 80</code></li>
-						<li><a href="http://localhost/game-state.json">http://localhost/game-state.json</a></li>
+						<li><code>cd /tmp && \<br>sudo python -m SimpleHTTPServer 80</code></li>
+						<li><a href="http://localhost/game-state.json">http://localhost/game-state.json</a> avec auto-reload dans le navigateur</li>
 					</ul>
 				</section>
 				<section data-background="assets/sebastian.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
@@ -374,6 +374,7 @@ try {
 					<p class="action">Aller sur <code>SnapshotsTest</code></p>
 					<p class="action">Lancer les tests</p>
 					<p class="fail">Ça fail</p>
+					<p>Le but ici est de définir une stratégie de snapshot : à l'état initial et tous les 10 événements</p>
 				</section>
 				<section data-background="assets/eric.png" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
 					<h2>3 - Snapshots</h2>
