@@ -1,7 +1,7 @@
 package com.adaptionsoft.games.trivia.ui.players;
 
+import com.adaptionsoft.games.trivia.query.Player;
 import com.adaptionsoft.games.trivia.ui.Component;
-import com.adaptionsoft.games.trivia.ui.Player;
 import com.adaptionsoft.games.trivia.ui.TriviaClient;
 import com.adaptionsoft.games.trivia.ui.board.Board;
 import processing.core.PFont;
@@ -34,16 +34,17 @@ public class Players implements Component {
             parent.fill(0);
 
             int playerNumber = 0;
-            for (Player player : parent.game.players()) {
+            for (Player player : parent.gameState.getPlayers().values()) {
                 final int xCenter = playerWidth * playerNumber + playerWidth / 2;
                 parent.pushStyle();
                 {
-                    if (player.isCurrentPlayer()) {
+                    if (player.equals(parent.gameState.getCurrentPlayer())) {
                         parent.textFont(fontBold);
                     }
-                    parent.fill(player.colors[0][0], player.colors[0][1], player.colors[0][2]);
+                    // TODO put contants in this class.
+                    parent.fill(128, 0, 255);
                     parent.text(player.getName(), xCenter, 30);
-                    IntStream.range(0, player.goldCoins()).forEach(i -> parent.image(coin, xCenter - coin.width * 3 + i * coin.width, 40));
+                    IntStream.range(0, player.getGoldCoins()).forEach(i -> parent.image(coin, xCenter - coin.width * 3 + i * coin.width, 40));
                 }
                 parent.popStyle();
                 drawPlayerOnBoard(player, playerNumber);
@@ -54,17 +55,14 @@ public class Players implements Component {
     }
 
     private void drawPlayerOnBoard(Player player, int playerNumber) {
-        if (!player.location().isPresent()) {
-            return;
-        }
-
         final float
                 delta = ANGLE / MAX_NUMBER_OF_PLAYERS,
-                angleForPlayer = (player.location().getAsInt() * MAX_NUMBER_OF_PLAYERS + playerNumber) * delta + (delta / 2),
+                angleForPlayer = (player.getLocation() * MAX_NUMBER_OF_PLAYERS + playerNumber) * delta + (delta / 2),
                 radius = (board.size - board.thickness / 2) / 2;
 
         parent.pushStyle();
-        parent.fill(player.colors[1][0], player.colors[1][1], player.colors[1][2]);
+        // TODO put contants in this class.
+        parent.fill(204, 102, 255);
         board.boardDrawing(() -> parent.ellipse(radius * cos(angleForPlayer), radius * sin(angleForPlayer), board.thickness / 8, board.thickness / 8));
         parent.popStyle();
     }

@@ -1,7 +1,7 @@
 package com.adaptionsoft.games.trivia.ui.penaltybox;
 
+import com.adaptionsoft.games.trivia.query.Player;
 import com.adaptionsoft.games.trivia.ui.Component;
-import com.adaptionsoft.games.trivia.ui.Player;
 import com.adaptionsoft.games.trivia.ui.TriviaClient;
 import com.adaptionsoft.games.trivia.ui.board.Board;
 
@@ -46,9 +46,10 @@ public class PenaltyBox implements Component {
             parent.rect(xCenter, yCenter, size, size);
 
             parent.strokeWeight(1);
-            parent.game.players().stream().filter(Player::isOnPenaltyBox).forEach(player -> {
+            parent.gameState.getPlayers().values().stream().filter(Player::isInPenaltyBox).forEach(player -> {
                 int[] coordinates = playerCoordinates.next();
-                parent.fill(player.colors[1][0], player.colors[1][1], player.colors[1][2]);
+                // TODO put constants in a separate class.
+                parent.fill(204, 102, 255);
                 parent.ellipse(coordinates[0], coordinates[1], board.thickness / 8, board.thickness / 8);
             });
 

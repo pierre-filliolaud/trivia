@@ -33,7 +33,7 @@ public class TriviaClient extends PApplet implements EventsListener, Restorable 
     private static final int WIDTH = 640;
     private static final int HEIGHT = 480;
 
-    public Game game;
+    public GameState gameState;
 
     private Board board;
     private Deck deck;
@@ -62,7 +62,7 @@ public class TriviaClient extends PApplet implements EventsListener, Restorable 
         this.eventsWalker = new FileEventWalker(blockingProducerConsumer);
         this.snapshots = new Snapshots(this);
 
-        this.game = new Game();
+        this.gameState = new GameState();
 
         this.board = new Board(this);
         this.deck = new Deck(this);
@@ -77,7 +77,7 @@ public class TriviaClient extends PApplet implements EventsListener, Restorable 
             return;
         }
 
-        new Thread(new UpdateUIWithEvents(blockingProducerConsumer, this, snapshots), "EventConsumer").start();
+        new Thread(new UpdateUIWithEvents(blockingProducerConsumer, gameState, snapshots, this), "EventConsumer").start();
     }
 
     @Override
@@ -97,13 +97,11 @@ public class TriviaClient extends PApplet implements EventsListener, Restorable 
 
     @Override
     public void on(PlayerWasAdded event) {
-        game.playerAdded(event.name);
         redraw();
     }
 
     @Override
     public void on(CurrentPlayerWas event) {
-        game.currentPlayerChanged(event.player);
         redraw();
     }
 
@@ -115,37 +113,31 @@ public class TriviaClient extends PApplet implements EventsListener, Restorable 
 
     @Override
     public void on(LocationWas event) {
-        game.locationChanged(event.player, event.newLocation);
         redraw();
     }
 
     @Override
     public void on(CategoryWas event) {
-        Category.fromName(event.category.name()).ifPresent(game::categoryChanged);
         redraw();
     }
 
     @Override
     public void on(QuestionWasAsked event) {
-        Category.fromName(event.category.name()).ifPresent(identifiedCategory -> game.questionAsked(identifiedCategory, event.questionNumber));
         redraw();
     }
 
     @Override
     public void on(NewGoldCoinsCount event) {
-        game.goldCoinsEarned(event.player, event.newGoldCoinsCount);
         redraw();
     }
 
     @Override
     public void on(PlayerWasSentToPenaltyBox event) {
-        game.playerSentToPenaltyBox(event.player);
         redraw();
     }
 
     @Override
     public void on(PlayerWasGettingOutOfThePenaltyBox event) {
-        game.playerGotOutOfPenaltyBox(event.player);
         redraw();
     }
 
@@ -206,7 +198,7 @@ public class TriviaClient extends PApplet implements EventsListener, Restorable 
 
     @Override
     public void restore(GameState state) {
-        game.restore(state);
+        gameState = state.copy();
         redraw();
     }
 
