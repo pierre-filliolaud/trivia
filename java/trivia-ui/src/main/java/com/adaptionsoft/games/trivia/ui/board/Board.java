@@ -1,6 +1,5 @@
 package com.adaptionsoft.games.trivia.ui.board;
 
-import com.adaptionsoft.games.trivia.ui.Category;
 import com.adaptionsoft.games.trivia.ui.Component;
 import com.adaptionsoft.games.trivia.ui.TriviaClient;
 
@@ -42,8 +41,8 @@ public class Board implements Component {
 
     private void drawOnBoardReferential() {
         for (int factor = 0; factor < NUMBER_OF_LOCATIONS; factor++) {
-            Category category = Category.fromIndex(factor);
-            category.fill(parent);
+            CategoryAndColor category = parent.categoryAndColorByLocation.get(factor);
+            parent.fill(category.red, category.green, category.blue);
             parent.arc(
                     0, 0,
                     size, size,

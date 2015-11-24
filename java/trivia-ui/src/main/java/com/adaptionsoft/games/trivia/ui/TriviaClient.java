@@ -17,9 +17,8 @@ import processing.event.MouseEvent;
 
 import javax.swing.*;
 import java.io.File;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicLongFieldUpdater;
 
 import static java.util.stream.Collectors.toList;
 
@@ -44,6 +43,8 @@ public class TriviaClient extends PApplet implements EventsListener, Restorable 
 
     private FileEventWalker eventsWalker;
     private Snapshots snapshots;
+    private UpdateUIWithEvents updateUIWithEvents;
+    private final Map<Integer, CategoryAndColor> categoryAndColorByLocation = new HashMap<>();
 
     @Override
     public void settings() {
@@ -70,14 +71,9 @@ public class TriviaClient extends PApplet implements EventsListener, Restorable 
         this.dice = new Dice(this, board);
         this.penaltyBox = new PenaltyBox(this, board);
         this.progress = new Progress(this, board, eventsWalker::percent);
+        this.updateUIWithEvents = new UpdateUIWithEvents(blockingProducerConsumer, gameState, snapshots, this);
 
-        if (Optional.ofNullable(System.getProperty("produce.and.consume"))
-                .map(consumeAndProduce -> Objects.equals(consumeAndProduce, "false"))
-                .orElse(false)) {
-            return;
-        }
-
-        new Thread(new UpdateUIWithEvents(blockingProducerConsumer, gameState, snapshots, this), "EventConsumer").start();
+        new Thread(updateUIWithEvents, "EventConsumer").start();
     }
 
     @Override
@@ -164,14 +160,14 @@ public class TriviaClient extends PApplet implements EventsListener, Restorable 
             eventsWalker.next(1);
             return;
         }
-        
+
         if (event.getKeyCode() == 37 || event.getKeyCode() == 38) {
             // left or up
             int numberOfEventsToRollback = snapshots.restore(1);
             eventsWalker.back(numberOfEventsToRollback);
             return;
         }
-        
+
         if (event.getKey() == 'o' || event.getKey() == 'O') {
             List<String> scenarii = FileEventWalker.referenceFiles().map(File::getName).collect(toList());
             String scenario = (String) JOptionPane.showInputDialog(null, "Please choose your scenario:", "Scenarii", JOptionPane.PLAIN_MESSAGE, null, scenarii.toArray(), null);
@@ -199,6 +195,7 @@ public class TriviaClient extends PApplet implements EventsListener, Restorable 
     @Override
     public void restore(GameState state) {
         gameState = state.copy();
+        updateUIWithEvents.updateGameState(gameState);
         redraw();
     }
 

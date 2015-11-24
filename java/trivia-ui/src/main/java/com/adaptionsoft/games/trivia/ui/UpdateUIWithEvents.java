@@ -1,7 +1,10 @@
 package com.adaptionsoft.games.trivia.ui;
 
+import com.adaptionsoft.games.trivia.query.GameState;
 import com.adaptionsoft.games.trivia.ui.event.EventConsumer;
 import com.adaptionsoft.games.trivia.event.EventsListener;
+
+import java.util.EventListener;
 
 class UpdateUIWithEvents implements Runnable {
 
@@ -11,6 +14,15 @@ class UpdateUIWithEvents implements Runnable {
     public UpdateUIWithEvents(EventConsumer consumer, EventsListener... eventsListeners) {
         this.consumer = consumer;
         this.eventsListeners = eventsListeners;
+    }
+
+    void updateGameState(GameState newGameState) {
+        for (int i = 0; i < eventsListeners.length; i++) {
+            if (eventsListeners[i] instanceof GameState) {
+                eventsListeners[i] = newGameState;
+                break;
+            }
+        }
     }
 
     @Override

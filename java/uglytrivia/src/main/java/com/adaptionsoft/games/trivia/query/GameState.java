@@ -138,6 +138,7 @@ public class GameState implements EventsListener {
     @Override
     public void on(QuestionWasAsked event) {
         questions.remove(event.category, event.questionNumber);
+        currentCategory = empty();
         write();
     }
 

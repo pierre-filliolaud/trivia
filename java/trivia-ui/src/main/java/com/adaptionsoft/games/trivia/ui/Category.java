@@ -26,17 +26,4 @@ public enum Category {
     public void fill(PApplet context) {
         context.fill(red, green, blue);
     }
-
-    public static Category fromIndex(int index) {
-        return Category.values()[index % Category.values().length];
-    }
-
-    static Optional<Category> fromName(String name) {
-        try {
-            return Optional.of(valueOf(name.toUpperCase()));
-        } catch (IllegalArgumentException e) {
-            return empty();
-        }
-    }
-
 }

@@ -1,12 +1,11 @@
 package com.adaptionsoft.games.trivia.ui.deck;
 
-import com.adaptionsoft.games.trivia.ui.Category;
+import com.adaptionsoft.games.trivia.Category;
 import com.adaptionsoft.games.trivia.ui.Component;
 import com.adaptionsoft.games.trivia.ui.TriviaClient;
 
 import java.util.Map;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import static processing.core.PApplet.max;
 import static processing.core.PApplet.min;
@@ -34,16 +33,16 @@ public class Deck implements Component {
             parent.translate((parent.width - deckWidth) / 2, parent.height - cardHeight - 2);
             for (Category category : Category.values()) {
                 Integer startInclusive = parent.gameState.getQuestions().entrySet().stream()
-                        .filter(e -> e.getKey().name().equals(category.name()))
+                        .filter(e -> e.getKey().name().equalsIgnoreCase(category.name()))
                         .mapToInt(Map.Entry::getValue)
                         .findFirst()
-                        .orElse(0);
-                IntStream.range(startInclusive, 50).mapToObj(i -> i)
+                        .orElse(50);
+                IntStream.range(50 - startInclusive, 50).mapToObj(i -> i)
                         .sorted((questionNumber1, questionNumber2) -> questionNumber2.compareTo(questionNumber1))
                         .forEach(x -> {
                             boolean isCurrentCategory = parent.gameState.getCurrentCategory() != null
-                                    && parent.gameState.getCurrentCategory().name().equals(category.name());
-                            int y = isCurrentCategory && x.equals(startInclusive) ? -cardHeight / 2 : 0;
+                                    && parent.gameState.getCurrentCategory().name().equalsIgnoreCase(category.name());
+                            int y = isCurrentCategory && x.equals(50 - startInclusive) ? -cardHeight / 2 : 0;
                             category.fill(parent);
                             parent.rect(
                                     x * 2, y,
