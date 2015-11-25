@@ -2,13 +2,14 @@ package com.adaptionsoft.games.trivia.ui.penaltybox;
 
 import com.adaptionsoft.games.trivia.query.Player;
 import com.adaptionsoft.games.trivia.ui.Component;
+import com.adaptionsoft.games.trivia.ui.PlayersColors;
 import com.adaptionsoft.games.trivia.ui.TriviaClient;
 import com.adaptionsoft.games.trivia.ui.board.Board;
 
+import java.util.Collection;
 import java.util.Iterator;
 
-import static com.adaptionsoft.games.trivia.ui.TriviaClient.*;
-import static java.util.Arrays.asList;
+import static com.adaptionsoft.games.trivia.ui.TriviaClient.BACKGROUND;
 import static processing.core.PConstants.CENTER;
 
 public class PenaltyBox implements Component {
@@ -30,13 +31,13 @@ public class PenaltyBox implements Component {
                 right = xCenter + size / 3,
                 top = yCenter - size / 3,
                 bottom = yCenter + size / 3;
-        final Iterator<int[]> playerCoordinates = asList(
+        final int[][] playerCoordinates = {
                 new int[]{xCenter, yCenter},
                 new int[]{left, top},
                 new int[]{right, bottom},
                 new int[]{right, top},
                 new int[]{left, bottom}
-        ).iterator();
+        };
 
         parent.pushStyle();
         {
@@ -46,12 +47,17 @@ public class PenaltyBox implements Component {
             parent.rect(xCenter, yCenter, size, size);
 
             parent.strokeWeight(1);
-            parent.gameState.getPlayers().values().stream().filter(Player::isInPenaltyBox).forEach(player -> {
-                int[] coordinates = playerCoordinates.next();
-                // TODO put constants in a separate class.
-                parent.fill(204, 102, 255);
+            Collection<Player> values = parent.gameState.getPlayers().values();
+            Iterator<Player> players = values.iterator();
+            for (int i = 0; i < values.size(); i++) {
+                if (!players.next().isInPenaltyBox()) {
+                    continue;
+                }
+
+                int[] coordinates = playerCoordinates[i];
+                PlayersColors.fillPiece(parent, i);
                 parent.ellipse(coordinates[0], coordinates[1], board.thickness / 8, board.thickness / 8);
-            });
+            }
 
             parent.strokeWeight(2);
             for (int x = xCenter - size / 2; x < xCenter + size / 2; x += size / 8) {

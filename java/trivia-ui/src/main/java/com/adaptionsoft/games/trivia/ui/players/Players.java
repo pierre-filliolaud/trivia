@@ -2,6 +2,7 @@ package com.adaptionsoft.games.trivia.ui.players;
 
 import com.adaptionsoft.games.trivia.query.Player;
 import com.adaptionsoft.games.trivia.ui.Component;
+import com.adaptionsoft.games.trivia.ui.PlayersColors;
 import com.adaptionsoft.games.trivia.ui.TriviaClient;
 import com.adaptionsoft.games.trivia.ui.board.Board;
 import processing.core.PFont;
@@ -41,8 +42,7 @@ public class Players implements Component {
                     if (player.equals(parent.gameState.getCurrentPlayer())) {
                         parent.textFont(fontBold);
                     }
-                    // TODO put contants in this class.
-                    parent.fill(128, 0, 255);
+                    PlayersColors.fillFont(parent, playerNumber);
                     parent.text(player.getName(), xCenter, 30);
                     IntStream.range(0, player.getGoldCoins()).forEach(i -> parent.image(coin, xCenter - coin.width * 3 + i * coin.width, 40));
                 }
@@ -61,8 +61,7 @@ public class Players implements Component {
                 radius = (board.size - board.thickness / 2) / 2;
 
         parent.pushStyle();
-        // TODO put contants in this class.
-        parent.fill(204, 102, 255);
+        PlayersColors.fillPiece(parent, playerNumber);
         board.boardDrawing(() -> parent.ellipse(radius * cos(angleForPlayer), radius * sin(angleForPlayer), board.thickness / 8, board.thickness / 8));
         parent.popStyle();
     }
