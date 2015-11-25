@@ -18,7 +18,6 @@ import processing.event.MouseEvent;
 import javax.swing.*;
 import java.io.File;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicLongFieldUpdater;
 
 import static java.util.stream.Collectors.toList;
 
@@ -44,7 +43,6 @@ public class TriviaClient extends PApplet implements EventsListener, Restorable 
     private FileEventWalker eventsWalker;
     private Snapshots snapshots;
     private UpdateUIWithEvents updateUIWithEvents;
-    private final Map<Integer, CategoryAndColor> categoryAndColorByLocation = new HashMap<>();
 
     @Override
     public void settings() {

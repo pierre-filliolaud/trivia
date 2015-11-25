@@ -1,6 +1,7 @@
 package com.adaptionsoft.games.trivia.ui.deck;
 
 import com.adaptionsoft.games.trivia.Category;
+import com.adaptionsoft.games.trivia.ui.CategoryAndColor;
 import com.adaptionsoft.games.trivia.ui.Component;
 import com.adaptionsoft.games.trivia.ui.TriviaClient;
 
@@ -43,7 +44,7 @@ public class Deck implements Component {
                             boolean isCurrentCategory = parent.gameState.getCurrentCategory() != null
                                     && parent.gameState.getCurrentCategory().name().equalsIgnoreCase(category.name());
                             int y = isCurrentCategory && x.equals(50 - startInclusive) ? -cardHeight / 2 : 0;
-                            category.fill(parent);
+                            CategoryAndColor.categoryAndColorByLocation.get(category.ordinal()).fill(parent);
                             parent.rect(
                                     x * 2, y,
                                     cardWidth, cardHeight);
