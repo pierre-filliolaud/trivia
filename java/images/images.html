@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+    <style>
+body {
+    font-family: sans-serif;
+}
+a {
+    color: grey;
+    text-decoration: none;
+}
+    </style>
+    <script>
+    window.onload = function() {
+        var index = 0;
+        displayImage(1);
+        document.onkeypress = keyPressed;
+        function keyPressed(e) {
+            if (e.key === 'ArrowRight') {
+                index++;
+                if (index > 5) {
+                    index = 0;
+                }
+            } else if (e.key === 'ArrowLeft') {
+                index--;
+                if (index < 0) {
+                    index = 5;
+                }
+            }
+            displayImage(index + 1);
+        }
+        function displayImage(index) {
+            document.getElementById('image').src = index + '.png';
+            document.getElementById('index').innerHTML = index;
+        }
+    };
+    </script>
+</head>
+<body>
+<div id="index"></div>
+<div style="text-align: center;"><img id="image" src=""></div>
+</body>
+
+</html>

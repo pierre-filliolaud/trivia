@@ -45,8 +45,8 @@
 					<ul>
 						<li><code>git checkout live-coding-1</code></li>
 						<li><code>mvn clean</code></li>
-						<li><code>cd /tmp && \<br>sudo python -m SimpleHTTPServer 80</code></li>
-						<li><a href="http://localhost/game-state.json">http://localhost/game-state.json</a> avec auto-reload dans le navigateur</li>
+						<li>Navigateur ouvert <a href="file:///tmp/game-state.json">file:///tmp/game-state.json</a></li>
+						<li>IDE ouvert</li>
 					</ul>
 				</section>
 				<section data-background="assets/sebastian.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
@@ -140,6 +140,7 @@ assertThat(game.howManyPlayers()).isEqualTo(1)
 					<h2>1 - ES - events</h2>
 					<p>Oh regarde : il y a des sorties dans la console</p>
 					<p>Ça serait pas des événements par hasard ?</p>
+					<p class="action">Montrer l'image 1</p>
 					<pre><code data-trim>
 assertThat(eventStore.events()).containsExactly(
     new PlayerWasAdded("eric"),
@@ -169,6 +170,7 @@ line -> {
 				</section>
 				<section data-background="assets/eric.png" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
 					<h2>1 - ES</h2>
+					<p class="action">Montrer l'image 2</p>
 					<p><strong>Résumé</strong> : on a interprété les sorties de la console comme des événements expoitables dans un event store.</p>
 					<p><strong>Transition</strong> : nous allons découvrir quelques fonctionnalités d'un event store à partir des tests.</p>
 				</section>
@@ -260,6 +262,7 @@ Queries
  boolean isPlayable()
  int howManyPlayers()
 					</code></pre>
+					<p class="action">Montrer l'image 3</p>
 				</section>
 				<section data-background="assets/sebastian.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
 					<h2>2 - CQRS - Segreg.</h2>
@@ -292,6 +295,7 @@ Queries
 					<p class="action">Revenir sur l'interface <code>Queries</code></p>
 					<p>Il n'y a pas de <em>queries</em> dans <code>Game</code></p>
 					<p>C'est une implémentation du circuit d'écriture du système</p>
+					<p class="action">Montrer l'image 4</p>
 				</section>
 				<section data-background="assets/eric.png" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
 					<h2>2 - CQRS - Segreg.</h2>
@@ -318,6 +322,7 @@ Queries
 					<h2>2 - CQRS - Segreg.</h2>
 					<h3>Queries</h3>
 					<p>À chaque modification de l'état, nous allons écrire sur le disque</p>
+					<p class="action">Montrer l'image 5</p>
 					<p class="action">Créer la méthode <code>write()</code>, copier-coller le code de création de l'<code>ObjectMapper</code> et ajouter</p>
 					<pre><code>
 try {
@@ -361,6 +366,7 @@ try {
 				</section>
 				<section data-background="assets/eric.png" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
 					<h2>3 - Snapshots</h2>
+					<p class="action">Montrer l'image 6</p>
 					<p>On a déjà une implémentation de snapshot</p>
 					<p class="action">Aller dans <code>Snapshots</code></p>
 					<p>On est en terrain connu :</p>
