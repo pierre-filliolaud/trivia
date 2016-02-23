@@ -13,17 +13,19 @@ a {
 }
     </style>
     <script>
+    const LEFT = 37,
+            RIGHT = 39;
     window.onload = function() {
         var index = 0;
         displayImage(1);
-        document.onkeypress = keyPressed;
-        function keyPressed(e) {
-            if (e.key === 'ArrowRight') {
+        document.onkeydown = keyDown;
+        function keyDown(e) {
+            if (e.keyCode === RIGHT) {
                 index++;
                 if (index > 5) {
                     index = 0;
                 }
-            } else if (e.key === 'ArrowLeft') {
+            } else if (e.keyCode === LEFT) {
                 index--;
                 if (index < 0) {
                     index = 5;
