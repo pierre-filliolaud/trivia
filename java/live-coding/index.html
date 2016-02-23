@@ -17,6 +17,12 @@
 		<link rel="stylesheet" href="css/theme/moon.css" id="theme">
 		<link rel="stylesheet" href="css/live-coding.css" id="theme">
 
+		<style type="text/css">
+			.action > img {
+				height: 60pt;
+			}
+		</style>
+
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 
@@ -140,7 +146,7 @@ assertThat(game.howManyPlayers()).isEqualTo(1)
 					<h2>1 - ES - events</h2>
 					<p>Oh regarde : il y a des sorties dans la console</p>
 					<p>Ça serait pas des événements par hasard ?</p>
-					<p class="action">Montrer l'image 1</p>
+					<p class="action">Montrer l'image 1 <img src="../images/1.png"/></p>
 					<pre><code data-trim>
 assertThat(eventStore.events()).containsExactly(
     new PlayerWasAdded("eric"),
@@ -170,7 +176,7 @@ line -> {
 				</section>
 				<section data-background="assets/eric.png" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
 					<h2>1 - ES</h2>
-					<p class="action">Montrer l'image 2</p>
+					<p class="action">Montrer l'image 2 <img src="../images/2.png"/></p>
 					<p><strong>Résumé</strong> : on a interprété les sorties de la console comme des événements expoitables dans un event store.</p>
 					<p><strong>Transition</strong> : nous allons découvrir quelques fonctionnalités d'un event store à partir des tests.</p>
 				</section>
@@ -262,7 +268,7 @@ Queries
  boolean isPlayable()
  int howManyPlayers()
 					</code></pre>
-					<p class="action">Montrer l'image 3</p>
+					<p class="action">Montrer l'image 3 <img src="../images/3.png"/></p>
 				</section>
 				<section data-background="assets/sebastian.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
 					<h2>2 - CQRS - Segreg.</h2>
@@ -295,7 +301,7 @@ Queries
 					<p class="action">Revenir sur l'interface <code>Queries</code></p>
 					<p>Il n'y a pas de <em>queries</em> dans <code>Game</code></p>
 					<p>C'est une implémentation du circuit d'écriture du système</p>
-					<p class="action">Montrer l'image 4</p>
+					<p class="action">Montrer l'image 4 <img src="../images/4.png"/></p>
 				</section>
 				<section data-background="assets/eric.png" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
 					<h2>2 - CQRS - Segreg.</h2>
@@ -322,7 +328,7 @@ Queries
 					<h2>2 - CQRS - Segreg.</h2>
 					<h3>Queries</h3>
 					<p>À chaque modification de l'état, nous allons écrire sur le disque</p>
-					<p class="action">Montrer l'image 5</p>
+					<p class="action">Montrer l'image 5 <img src="../images/5.png"/></p>
 					<p class="action">Créer la méthode <code>write()</code>, copier-coller le code de création de l'<code>ObjectMapper</code> et ajouter</p>
 					<pre><code>
 try {
@@ -366,7 +372,7 @@ try {
 				</section>
 				<section data-background="assets/eric.png" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
 					<h2>3 - Snapshots</h2>
-					<p class="action">Montrer l'image 6</p>
+					<p class="action">Montrer l'image 6 <img src="../images/6.png"/></p>
 					<p>On a déjà une implémentation de snapshot</p>
 					<p class="action">Aller dans <code>Snapshots</code></p>
 					<p>On est en terrain connu :</p>
