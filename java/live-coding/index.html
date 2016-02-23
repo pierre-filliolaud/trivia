@@ -329,23 +329,28 @@ Queries
 					<h3>Queries</h3>
 					<p>À chaque modification de l'état, nous allons écrire sur le disque</p>
 					<p class="action">Montrer l'image 5 <img src="../images/5.png"/></p>
+				</section>
+				<section data-background="assets/sebastian.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+					<h2>2 - CQRS - Segreg.</h2>
+					<h3>Queries</h3>
 					<p class="action">Créer la méthode <code>write()</code>, copier-coller le code de création de l'<code>ObjectMapper</code> et ajouter</p>
 					<pre><code>
 try {
-    File file = Paths.get("target", "game-state.json").toFile();
+    File file = Paths.get("/tmp", "game-state.json").toFile();
     mapper.writeValue(file, this);
 } catch (IOException e) {
     throw new UncheckedIOException(e);
 }
 					</code></pre>
+					<p class="action">Appeler <code>write()</code> dans le constructeur et à chaque événement qui modifie un état</p>
 					<p class="success">Ça passe</p>
 				</section>
-				<section data-background="assets/sebastian.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+				<section data-background="assets/eric.png" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
 					<h2>2 - CQRS - Segreg.</h2>
 					<h3>Démo</h3>
 					<p class="action">Montrer la méthode <code>main()</code></p>
 					<p class="action">Exécuter la méthode <code>main()</code></p>
-					<p class="action">Dans un navigateur : <a href="http://localhost/game-state.json">http://localhost/game-state.json</a></p>
+					<p class="action">Dans un navigateur : <a href="file:///tmp/game-state.json">file:///tmp/game-state.json</a></p>
 					<p class="action">Entrer <code>seb was added</code></p>
 					<p class="action">Rafraîchir la page</p>
 				</section>
@@ -400,7 +405,7 @@ try {
 					<p>Démo</p>
 					<p class="action">Lancer <code>TriviaClient</code></p>
 				</section>
-				<section data-background="assets/sebastian.png" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
+				<section data-background="assets/sebastian.jpg" data-background-repeat="no-repeat" data-background-size="48pt" data-background-position="top left">
 					<h2>Conclusion</h2>
 					<p>Event Sourcing c'est proche du métier : EventStorming, système auditable</p>
 					<p>CQRS ça clarifie les choses, ça apporte de la perf</p>
