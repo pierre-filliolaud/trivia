@@ -14,7 +14,15 @@ a {
     </style>
     <script>
     const LEFT = 37,
-            RIGHT = 39;
+            RIGHT = 39,
+            TITLES = [
+                'Game write logs',
+                'GameTest uses event EventStore to assert Game behavior',
+                'Game as a CQRS implementation',
+                'Game doesn\'t implements any queries',
+                'GameState uses events to write file to disk',
+                'Big picture'
+            ];
     window.onload = function() {
         var index = 0;
         displayImage(1);
@@ -36,6 +44,7 @@ a {
         function displayImage(index) {
             document.getElementById('image').src = index + '.png';
             document.getElementById('index').innerHTML = index;
+            document.title = TITLES[index - 1];
         }
     };
     </script>
