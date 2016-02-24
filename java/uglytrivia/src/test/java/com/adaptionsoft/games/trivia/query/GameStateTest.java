@@ -174,7 +174,7 @@ public class GameStateTest {
         ObjectMapper mapper = new ObjectMapper()
                 .setSerializationInclusion(JsonInclude.Include.NON_NULL)
                 .enable(SerializationFeature.INDENT_OUTPUT);
-        GameState expectedState = new GameState();
+        GameState expectedState = new GameState(true);
 
         try {
             assertThat(file).exists().hasContent(mapper.writeValueAsString(expectedState));
@@ -201,7 +201,7 @@ public class GameStateTest {
         expectedState.currentCategory = Optional.of(currentCategory);
         expectedState.currentPlayer = Optional.of(currentPlayer);
         expectedState.dice = Optional.of(2);
-        GameState gameState = new GameState();
+        GameState gameState = new GameState(true);
 
         gameState.on(new PlayerWasAdded("first"));
         gameState.on(new LocationWas("first", firstLocation));

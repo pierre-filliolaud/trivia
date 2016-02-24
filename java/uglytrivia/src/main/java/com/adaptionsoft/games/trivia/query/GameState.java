@@ -35,7 +35,7 @@ public class GameState implements EventsListener {
     private final Optional<Path> file;
 
     public GameState() {
-        this(true);
+        this(false);
     }
 
     public GameState(boolean haveToWrite) {
