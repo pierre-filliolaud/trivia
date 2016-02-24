@@ -28,8 +28,8 @@ public class TriviaClient extends PApplet implements EventsListener, Restorable 
     public static final int MAX_NUMBER_OF_PLAYERS = 5;
     public static final float ANGLE = 2 * PI / NUMBER_OF_LOCATIONS;
 
-    private static final int WIDTH = 640;
-    private static final int HEIGHT = 480;
+    private static final int WIDTH = 1014;
+    private static final int HEIGHT = 768;
 
     public GameState gameState;
 
