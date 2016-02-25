@@ -101,7 +101,6 @@ public class TriviaClient extends PApplet implements EventsListener, Restorable 
 
     @Override
     public void on(Rolled event) {
-        dice.rolled(event.roll);
         redraw();
     }
 

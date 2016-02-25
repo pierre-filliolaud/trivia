@@ -11,16 +11,15 @@ public class Dice implements Component {
     private final TriviaClient parent;
     private final Board board;
 
-    private Integer dice;
-
     public Dice(TriviaClient parent, Board board) {
         this.parent = parent;
         this.board = board;
-        this.dice = null;
     }
-    
+
     @Override
     public void draw() {
+        Integer dice = parent.gameState.getDice();
+
         if (dice == null) {
             return;
         }
@@ -61,9 +60,5 @@ public class Dice implements Component {
             }
         }
         parent.popStyle();
-    }
-
-    public void rolled(int roll) {
-        this.dice = roll;
     }
 }
