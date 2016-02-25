@@ -24,90 +24,90 @@ public class Snapshots implements EventsListener {
     @Override
     public void on(AnswerWasCorrect event) {
         state.on(event);
-        newEvent();
+        newEvent(event);
     }
 
     @Override
     public void on(AnswerWasNotCorrect event) {
         state.on(event);
-        newEvent();
+        newEvent(event);
     }
 
     @Override
     public void on(CategoryWas event) {
         state.on(event);
-        newEvent();
+        newEvent(event);
     }
 
     @Override
     public void on(CurrentPlayerWas event) {
         state.on(event);
-        newEvent();
+        newEvent(event);
     }
 
     @Override
     public void on(LocationWas event) {
         state.on(event);
-        newEvent();
+        newEvent(event);
     }
 
     @Override
     public void on(NewGoldCoinsCount event) {
         state.on(event);
-        newEvent();
+        newEvent(event);
     }
 
     @Override
     public void on(NewPlayerCount event) {
         state.on(event);
-        newEvent();
+        newEvent(event);
     }
 
     @Override
     public void on(PlayerWasAdded event) {
         state.on(event);
-        newEvent();
+        newEvent(event);
     }
 
     @Override
     public void on(PlayerWasGettingOutOfThePenaltyBox event) {
         state.on(event);
-        newEvent();
+        newEvent(event);
     }
 
     @Override
     public void on(PlayerWasNotGettingOutOfThePenaltyBox event) {
         state.on(event);
-        newEvent();
+        newEvent(event);
     }
 
     @Override
     public void on(PlayerWasSentToPenaltyBox event) {
         state.on(event);
-        newEvent();
+        newEvent(event);
     }
 
     @Override
     public void on(QuestionWasAsked event) {
         state.on(event);
-        newEvent();
+        newEvent(event);
     }
 
     @Override
     public void on(Rolled event) {
         state.on(event);
-        newEvent();
+        newEvent(event);
     }
 
     @Override
     public void on(UnknownEvent event) {
         state.on(event);
-        newEvent();
+        newEvent(event);
     }
 
-    private void newEvent() {
+    private void newEvent(Event event) {
         index++;
-        System.out.format("index %d%n", index);
+        System.out.format("index %d\t%s%n", index, event);
     }
 
     private void snapshot() {
