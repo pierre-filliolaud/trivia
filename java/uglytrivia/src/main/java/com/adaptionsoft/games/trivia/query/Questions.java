@@ -30,4 +30,17 @@ public class Questions {
         });
         return copy;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Questions questions1 = (Questions) o;
+        return Objects.equals(questions, questions1.questions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(questions);
+    }
 }
