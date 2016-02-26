@@ -47,10 +47,11 @@ public class FileEventWalker implements EventsWalker {
         if (eventsToPlay.isEmpty()) {
             return;
         }
-        IntStream.range(index, Math.min(index + numberOfEvents, eventsToPlay.size()))
+        int newIndex = Math.min(index + numberOfEvents, eventsToPlay.size());
+        IntStream.range(index, newIndex)
                 .mapToObj(eventsToPlay::get)
                 .forEach(producer::produce);
-        index += numberOfEvents;
+        index = newIndex;
     }
 
     @Override
